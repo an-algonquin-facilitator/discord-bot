@@ -2,7 +2,7 @@ import { CacheType, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { API } from "./api";
 import { getClasses } from "./utils";
 
-const joinClass = async (
+const leaveClass = async (
   api: API,
   interaction: CommandInteraction<CacheType>
 ): Promise<void> => {
@@ -20,18 +20,18 @@ const joinClass = async (
     return;
   }
 
-  api.addRole(interaction.guildId, interaction.user.id, rc.id);
+  api.removeRole(interaction.guildId, interaction.user.id, rc.id);
 
   interaction.reply({
-    content: `You joined ${classs}!`,
+    content: `You left ${classs}!`,
     ephemeral: true,
   });
 };
 
-export const joinClassCommand = {
+export const leaveClassCommand = {
   body: new SlashCommandBuilder()
-    .setName("ac-classes-join")
-    .setDescription("Join a specific class")
+    .setName("ac-classes-leave")
+    .setDescription("Leave a class")
     .addStringOption((option) =>
       option
         .setName("class-code")
@@ -39,5 +39,5 @@ export const joinClassCommand = {
         .setRequired(true)
     )
     .toJSON(),
-  f: joinClass,
+  f: leaveClass,
 };

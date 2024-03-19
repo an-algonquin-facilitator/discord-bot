@@ -8,6 +8,7 @@ import { listClassesCommand } from "./classes-list";
 import { API } from "./api";
 import { searchClassesCommand } from "./classes-search";
 import { joinClassCommand } from "./classes-join";
+import { leaveClassCommand } from "./classes-leave";
 
 interface Command {
   body: RESTPostAPIChatInputApplicationCommandsJSONBody;
@@ -23,3 +24,4 @@ const registerCommand = (command: Command) => {
 registerCommand(listClassesCommand);
 registerCommand(searchClassesCommand);
 registerCommand(joinClassCommand);
+registerCommand(leaveClassCommand);

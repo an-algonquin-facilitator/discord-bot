@@ -27,6 +27,8 @@ export interface API {
     appId: string,
     commands: RESTPostAPIChatInputApplicationCommandsJSONBody[]
   ): Promise<unknown>;
+  addRole(guildId: string, userId: string, roleId: string): Promise<unknown>;
+  removeRole(guildId: string, userId: string, roleId: string): Promise<unknown>;
 }
 
 export const newAPI = (rest: REST) => {
@@ -42,6 +44,12 @@ export const newAPI = (rest: REST) => {
       return rest.put(Routes.applicationCommands(appId), {
         body: commands,
       });
+    },
+    async addRole(guildId: string, userId: string, roleId: string) {
+      return rest.put(Routes.guildMemberRole(guildId, userId, roleId));
+    },
+    async removeRole(guildId: string, userId: string, roleId: string) {
+      return rest.delete(Routes.guildMemberRole(guildId, userId, roleId));
     },
   };
 };
