@@ -1,0 +1,11 @@
+[Unit]
+Description=aco-bot
+
+After=default.target
+
+[Service]
+WorkingDirectory=/etc/systemd/system/aco-bot
+ExecStart=sh /etc/systemd/system/aco-bot/start.sh
+
+[Install]
+WantedBy=default.target
